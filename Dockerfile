@@ -31,7 +31,7 @@ VOLUME /config /storage
 EXPOSE 6789
 
 # Add script to copy default config if one isn't there and start nzbget
-ADD run-nzbget.sh /bin/run-nzbget.sh
+COPY run-nzbget.sh /bin/run-nzbget.sh
  
 # Run our script
 CMD ["/bin/run-nzbget.sh"]

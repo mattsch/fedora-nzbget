@@ -9,6 +9,7 @@ Create with defaults:
 ```bash
 docker create -v /path/to/config/dir:/config \
     -v /path/to/storage/dir:/storage \
+    -v /etc/localtime:/etc/localtime:ro \
     -p 6789:6789 --name=nzbget mattsch/fedora-nzbget
 ```
 
@@ -17,6 +18,7 @@ Create with a custom uid/gid for the nzbget daemon:
 ```bash
 docker create -v /path/to/config/dir:/config \
     -v /path/to/storage/dir:/storage \
+    -v /etc/localtime:/etc/localtime:ro \
     -e LUID=1234 -e LGID=1234 \
     -p 6789:6789 --name=nzbget mattsch/fedora-nzbget
 ```
