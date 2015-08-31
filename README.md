@@ -4,18 +4,18 @@ Docker container for [NZBGet](http://nzbget.net/) using Fedora 22.
 
 ## Usage
 
-Run with defaults:
+Create with defaults:
 
 ```bash
-docker run -v /path/to/config/dir:/config \
+docker create -v /path/to/config/dir:/config \
     -v /path/to/storage/dir:/storage \
     -p 6789:6789 --name=nzbget mattsch/fedora-nzbget
 ```
 
-Run with a custom uid/gid for the nzbget daemon:
+Create with a custom uid/gid for the nzbget daemon:
 
 ```bash
-docker run -v /path/to/config/dir:/config \
+docker create -v /path/to/config/dir:/config \
     -v /path/to/storage/dir:/storage \
     -e LUID=1234 -e LGID=1234 \
     -p 6789:6789 --name=nzbget mattsch/fedora-nzbget

@@ -17,4 +17,4 @@ fi
 # Set permissions
 chown -R nzbget:nzbget /config/nzbget.conf /opt/nzbget
 
-exec runuser -l nzbget -c '/opt/nzbget/nzbget -s -o outputmode=log -c /config/nzbget.conf'
+exec runuser -l nzbget -c '/opt/nzbget/nzbget -s -c /config/nzbget.conf -o outputmode=log'
