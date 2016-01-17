@@ -3,6 +3,7 @@ MAINTAINER Matthew Schick <matthew.schick@gmail.com>
 
 # Install required packages
 RUN dnf install -yq procps-ng \
+                    python \
                     tar \
                     unrar && \
     dnf clean all
