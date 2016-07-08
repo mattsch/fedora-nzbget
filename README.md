@@ -1,6 +1,6 @@
 # Fedora NZBGet Docker Container
 
-Docker container for [NZBGet](http://nzbget.net/) using Fedora 22.
+Docker container for [NZBGet](http://nzbget.net/) using Fedora.
 
 ## Usage
 
