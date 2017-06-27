@@ -14,7 +14,7 @@ RUN dnf install -yq procps-ng \
 
 # Set uid/gid (override with the '-e' flag), 1000/1000 used since it's the
 # default first uid/gid on a fresh Fedora install
-ENV LUID=1000 LGID=1000 NZBGET_VER=18.1
+ENV LUID=1000 LGID=1000 NZBGET_VER=19.0
 
 # Create the nzbget user/group
 RUN groupadd -g $LGID nzbget && \
