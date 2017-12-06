@@ -1,4 +1,4 @@
-FROM mattsch/fedora-rpmfusion:latest
+FROM mattsch/fedora-rpmfusion:26
 MAINTAINER Matthew Schick <matthew.schick@gmail.com>
 
 # Run updates
@@ -14,7 +14,7 @@ RUN dnf install -yq procps-ng \
 
 # Set uid/gid (override with the '-e' flag), 1000/1000 used since it's the
 # default first uid/gid on a fresh Fedora install
-ENV LUID=1000 LGID=1000 NZBGET_VER=19.1
+ENV LUID=1000 LGID=1000 NZBGET_VER=20.0-testing-r2159
 
 # Create the nzbget user/group
 RUN groupadd -g $LGID nzbget && \
@@ -22,7 +22,7 @@ RUN groupadd -g $LGID nzbget && \
     
 # Grab the installer, do the thing
 RUN cd /tmp && \
-    curl -qOL http://github.com/nzbget/nzbget/releases/download/v$NZBGET_VER/nzbget-$NZBGET_VER-bin-linux.run && \
+    curl -qOL http://github.com/nzbget/nzbget/releases/download/v${NZBGET_VER/-testing/}/nzbget-$NZBGET_VER-bin-linux.run && \
     sh ./nzbget-$NZBGET_VER-bin-linux.run --destdir /opt/nzbget && \
     rm ./nzbget-$NZBGET_VER-bin-linux.run && \
     chown -R nzbget:nzbget /opt/nzbget
@@ -36,5 +36,3 @@ COPY run-nzbget.sh /bin/run-nzbget.sh
  
 # Run our script
 CMD ["/bin/run-nzbget.sh"]
-
-
