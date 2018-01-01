@@ -1,4 +1,4 @@
-FROM mattsch/fedora-rpmfusion:26
+FROM mattsch/fedora-rpmfusion:27
 MAINTAINER Matthew Schick <matthew.schick@gmail.com>
 
 # Run updates
@@ -36,5 +36,3 @@ COPY run-nzbget.sh /bin/run-nzbget.sh
  
 # Run our script
 CMD ["/bin/run-nzbget.sh"]
-
-
