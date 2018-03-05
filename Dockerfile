@@ -1,5 +1,6 @@
-FROM mattsch/fedora-rpmfusion:latest
+FROM mattsch/fedora-rpmfusion:27
 MAINTAINER Matthew Schick <matthew.schick@gmail.com>
+ARG upstream_tag=20.0-testing-r2159
 
 # Run updates
 RUN dnf upgrade -yq && \
@@ -14,7 +15,7 @@ RUN dnf install -yq procps-ng \
 
 # Set uid/gid (override with the '-e' flag), 1000/1000 used since it's the
 # default first uid/gid on a fresh Fedora install
-ENV LUID=1000 LGID=1000 NZBGET_VER=19.1
+ENV LUID=1000 LGID=1000 URL="http://github.com/nzbget/nzbget/releases/download"
 
 # Create the nzbget user/group
 RUN groupadd -g $LGID nzbget && \
@@ -22,9 +23,9 @@ RUN groupadd -g $LGID nzbget && \
     
 # Grab the installer, do the thing
 RUN cd /tmp && \
-    curl -qOL http://github.com/nzbget/nzbget/releases/download/v$NZBGET_VER/nzbget-$NZBGET_VER-bin-linux.run && \
-    sh ./nzbget-$NZBGET_VER-bin-linux.run --destdir /opt/nzbget && \
-    rm ./nzbget-$NZBGET_VER-bin-linux.run && \
+    curl -qOL ${URL}/v${upstream_tag/-testing/}/nzbget-$upstream_tag-bin-linux.run && \
+    sh ./nzbget-${upstream_tag}-bin-linux.run --destdir /opt/nzbget && \
+    rm ./nzbget-${upstream_tag}-bin-linux.run && \
     chown -R nzbget:nzbget /opt/nzbget
 
 # Need a config and storage volume, expose proper port
@@ -36,5 +37,3 @@ COPY run-nzbget.sh /bin/run-nzbget.sh
  
 # Run our script
 CMD ["/bin/run-nzbget.sh"]
-
-
